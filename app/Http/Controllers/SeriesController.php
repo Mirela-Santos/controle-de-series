@@ -13,7 +13,10 @@ class SeriesController extends Controller
      */
     public function index()
     {
-        //
+       //$serie = new Serie();
+       //$serie->all();
+       
+        return response(Serie::all(),500);
     }
 
     /**
