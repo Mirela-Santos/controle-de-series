@@ -13,7 +13,7 @@ class SeriesController extends Controller
      */
     public function index()
     {
-        //
+        return response(Serie::all(),200);
     }
 
     /**
