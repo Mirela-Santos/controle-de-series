@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Serie;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
 class SeriesController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Lista todas as series cadastradas no SGBD
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): Response
     {
-       //$serie = new Serie();
-       //$serie->all();
+       
        
         return response(Serie::all(),500);
     }
@@ -26,7 +27,7 @@ class SeriesController extends Controller
      */
     public function create()
     {
-        //
+        //chamar o formulário de cadastro de séries
     }
 
     /**

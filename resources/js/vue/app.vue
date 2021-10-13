@@ -1,17 +1,21 @@
 <template>
-    <div class = "seriesContainer">
-        <div class = "heading">
-        <h2 id = "title">Séries</h2>
-        <!-- botao do formulario -->
+    <div class="series-container">
+        <div class="heading">
+            <h2 id="title">Séries</h2>
+            <!-- @todo botão do formulário -->
         </div>
-        <!--todo componente para listagem de series -->
+        <list-view :series="series"/>
     </div>
 </template>
 
+
 <script>
-export default{
+ 
+import listView from './listView'
+
+export default {
     components: {
-        // indicar os componentes que estao sendo usados
+        listView
     },
     data: function() {
         return {
@@ -21,31 +25,14 @@ export default{
     methods: {
         getSeries() {
             axios.get('api/v1/series')
-            .then(response => {
-                this.series = response.data
-            }) // o que deu certo na requisiçao
-            .catch(error => {
-                console.log(error);
-            }) //o que deu errado na requisição
+                .then( response => {
+                    this.series = response.data
+                    console.log(this.series);
+                }) 
+                .catch( error => {
+                    console.log(error);
+                })
         },
-    },
-    created() {
-        this.getSeries();
-    },
-
-    data: function(){
-        return{series: [],}
-    },
-    methods: {
-        getSeries() {
-            axios.get('api/v1/series')
-            .then(response => {
-                this.series = response.data;
-            }) 
-            .catch(error => {
-                console.log(error);
-            })
-        }
     },
     created() {
         this.getSeries();
@@ -54,19 +41,17 @@ export default{
 </script>
 
 <style scoped>
-    .seriesContainer {
-        width: 350px;
+    .series-container {
+        width: 50%;
         margin: auto;
     }
 
     .heading {
-        background: #e6e6e6;
+        background: #757575;
         padding: 10px;
     }
 
     #title {
         text-align: center;
     }
-
-
 </style>
