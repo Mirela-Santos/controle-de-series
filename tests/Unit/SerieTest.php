@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Models\Serie;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
