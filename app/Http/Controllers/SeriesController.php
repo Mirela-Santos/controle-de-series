@@ -13,14 +13,10 @@ class SeriesController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        return response(Serie::all(),200);
-=======
        //$serie = new Serie();
        //$serie->all();
        
         return response(Serie::all(),500);
->>>>>>> 1350c2f642558e530213ca098806dc04583bbe9c
     }
 
     /**

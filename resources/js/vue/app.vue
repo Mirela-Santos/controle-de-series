@@ -1,27 +1,16 @@
 <template>
-<<<<<<< HEAD
-    <div class="seriesContainer">
-        <div class="heading">
-            <h2 id="title">Series</h2>
-            <!-- Botão para cadastrar novas series-->
-        </div>
-        <!-- div com listagem das series-->
-=======
     <div class = "seriesContainer">
         <div class = "heading">
         <h2 id = "title">Séries</h2>
         <!-- botao do formulario -->
         </div>
         <!--todo componente para listagem de series -->
->>>>>>> 1350c2f642558e530213ca098806dc04583bbe9c
     </div>
 </template>
 
 <script>
 export default{
     components: {
-<<<<<<< HEAD
-=======
         // indicar os componentes que estao sendo usados
     },
     data: function() {
@@ -42,10 +31,8 @@ export default{
     },
     created() {
         this.getSeries();
-    }
->>>>>>> 1350c2f642558e530213ca098806dc04583bbe9c
-
     },
+
     data: function(){
         return{series: [],}
     },
@@ -67,33 +54,19 @@ export default{
 </script>
 
 <style scoped>
-<<<<<<< HEAD
-    .seriesContainer{
-        width: 50%;
-        margin: auto;
-    }
-
-    .heading{
-=======
     .seriesContainer {
         width: 350px;
         margin: auto;
     }
 
     .heading {
->>>>>>> 1350c2f642558e530213ca098806dc04583bbe9c
         background: #e6e6e6;
         padding: 10px;
     }
 
     #title {
-<<<<<<< HEAD
-        text-align:center;
-    }
-=======
         text-align: center;
     }
 
 
->>>>>>> 1350c2f642558e530213ca098806dc04583bbe9c
 </style>
