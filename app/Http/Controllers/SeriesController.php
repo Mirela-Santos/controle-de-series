@@ -17,7 +17,7 @@ class SeriesController extends Controller
     {
        
        
-        return response(Serie::all(),500);
+        return response(Serie::all(),200);
     }
 
     /**

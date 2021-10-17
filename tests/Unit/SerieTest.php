@@ -32,7 +32,7 @@ class SerieTest extends TestCase
     {
         $response = $this->json('GET','/api/v1/series');
         $responseData = $response->getOriginalContent();
-        $this->assertEquals(0,$responseData->count());
+        $this->assertEquals(0,$responseData=-count());
 
         Serie::create(['nome' => 'serie de teste']);
 
