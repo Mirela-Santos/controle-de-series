@@ -8,9 +8,7 @@
     </div>
 </template>
 
-
 <script>
- 
 import listView from './listView'
 
 export default {
