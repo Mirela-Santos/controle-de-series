@@ -22,7 +22,7 @@ class SerieFactory extends Factory
     public function definition()
     {
         return [
-            'nome' => $this->faker->company,
+            'nome' => $this->faker->name(),
         ];
     }
 }

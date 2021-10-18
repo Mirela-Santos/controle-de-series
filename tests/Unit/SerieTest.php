@@ -15,10 +15,14 @@ class SerieTest extends TestCase
      *
      * @return void
      */
-    public function test_series_list_request_works()
+  
+    #erro do teste abaixo é uma retorno de 500 no seriescontrolles que não
+    #porquê está assim
+  
+     public function test_series_list_request_works()
     {
         $response = $this->json('GET','/api/v1/series');
-        $response->assertStatus(500);
+        $response->assertStatus(200);
     }
 
     public function test_series_list_is_collection()
@@ -32,7 +36,7 @@ class SerieTest extends TestCase
     {
         $response = $this->json('GET','/api/v1/series');
         $responseData = $response->getOriginalContent();
-        $this->assertEquals(0,$responseData=-count());
+        $this->assertEquals(0,$responseData->count());
 
         Serie::create(['nome' => 'serie de teste']);
 

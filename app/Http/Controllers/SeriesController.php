@@ -15,8 +15,6 @@ class SeriesController extends Controller
      */
     public function index(): Response
     {
-       
-       
         return response(Serie::all(),200);
     }
 
