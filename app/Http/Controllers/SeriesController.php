@@ -85,17 +85,6 @@ class SeriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function status($id){
-
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
         $id = filter_var($id, FILTER_VALIDATE_INT);
         if ($id == false) {
             return response('Not Found', 404);
@@ -110,5 +99,23 @@ class SeriesController extends Controller
         $serie->save();
 
         return response ('No Content',204);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $id = filter_var($id, FILTER_VALIDATE_INT);
+        if ($id == false){
+            return response('Not Found', 404);
+        }
+
+        Serie::destroy($id);
+
+        return response('OK', 200);
     }
 }
