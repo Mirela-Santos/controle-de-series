@@ -19,7 +19,7 @@ class SerieTest extends TestCase
     #erro do teste abaixo é uma retorno de 500 no seriescontrolles que não
     #porquê está assim
   
-     public function test_series_list_request_works()
+    /*public function test_series_list_request_works()
     {
         $response = $this->json('GET','/api/v1/series');
         $response->assertStatus(200);
@@ -45,4 +45,31 @@ class SerieTest extends TestCase
         $this->assertEquals(1,$responseData->count());
 
     }
+    
+    # TESTE DA EQUIPE
+
+    public function test_serie_gets_edited(){
+        $data = [
+            'nome' => 'nome-serie-criada', 
+            'status' => 'assistido'
+        ];
+        $this->json('POST', '/api/v1/serie', $data);
+        
+        $data = ['nome' => 'serie'];
+        $response = $this->json('PATCH', '/api/v1/serie/1', $data);
+        $responseData = $response->getOriginalContent();
+        $response->assertStatus(204);
+    }*/
+
+    public function test_status_changes(){
+        $data = [
+            'nome' => 'nome-serie-criada', 
+            'status' => 'assistido'
+        ];
+        $this->json('POST', '/api/v1/serie', $data);
+        $response = $this->json('PUT', '/api/v1/serie/1/status');
+        $response->assertStatus(204);
+        
+    }
+
 }

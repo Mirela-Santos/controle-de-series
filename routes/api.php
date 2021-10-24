@@ -17,4 +17,4 @@ Route :: prefix('/v1/serie')->group(function (){
     Route :: patch('/{id}',[SeriesController::class, 'update']);
     Route :: put('{id}/status',[SeriesController::class, 'status']);
     Route :: delete('/{id}',[SeriesController::class, 'destroy']);
-});
+}); 
