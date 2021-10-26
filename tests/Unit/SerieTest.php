@@ -16,8 +16,7 @@ class SerieTest extends TestCase
      * @return void
      */
   
-    #erro do teste abaixo é uma retorno de 500 no seriescontrolles que não
-    #porquê está assim
+   
   
     public function test_series_list_request_works()
     {
