@@ -91,10 +91,10 @@ class SeriesController extends Controller
         }
 
         $serie = Serie::find($id);
-        if ($serie->status == 'não-assistido') {
+        if ($serie->status == 'nao-assistido') {
             $serie->status = 'assistido';
         } else {
-            $serie->status = 'não assistido';
+            $serie->status = 'nao-assistido';
         }
         $serie->save();
 
