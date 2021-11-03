@@ -1,18 +1,32 @@
 <template>
-    <div class="series-container">
-        <div class="heading">
-            <h1 id="title">Séries</h1>
-            <!-- @todo botão do formulário -->
+    <div>
+            <nav class="navbar navbar-dark bg-dark">
+                <a href="#" class ="navbar-brand">Séries</a>
+            </nav>
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Séries</h2>
+                    <form-series v-on:reloadlist="getSeries()"/>
+                </div>
+                <div class="card-body">
+                    <table-series 
+                    :series="series"
+                    v-on:reloadlist="getSeries()"
+                    />        
+                </div>
+            </div>
         </div>
-        <table-series :series="series"/>
     </div>
 </template>
 
 <script>
-import tableSeries from './tableSeries.vue'
+import tableSeries from './tableSeries.vue';
+import formSeries from './formSeries.vue';
 
 export default {
     components: {
+        formSeries,
         tableSeries
     },
     data: function() {
@@ -38,19 +52,16 @@ export default {
 }
 </script>
 
-<style scoped>
-    .series-container {
-        margin: 10px auto;
-        width: 50%;
+<style scoped> 
+    nav{
+        margin-bottom: 10px;
     }
 
-    .heading {
-        background: red;
-        border-radius: 10px;
-        padding: 15px;
+    .card{
+        margin: 20px 30px;
     }
 
-    #title {
-        text-align: center;
+    .nav-brand{
+        margin-left: 20px;
     }
 </style>
