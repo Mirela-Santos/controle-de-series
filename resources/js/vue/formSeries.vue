@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-auto">
-            <label for="titulo" class="form-label">Título:</label>
+            <span for="titulo" class="form-label">Título:</span>
         </div>
         <div class="col-auto">
             <input 
@@ -16,6 +16,27 @@
             <button class="btn btn-primary" @click="cadastrarSerie()">
                 Cadastrar
             </button>
+        </div>
+        <div id="v-model-select" class="col-auto">
+            <span>Categoria: {{ selected }}</span>
+            <select v-model="selected">
+                <option disabled value="">Selecione uma categoria</option>
+                <option>Ação</option>
+                <option>Terror</option>
+                <option>Comédia</option>
+                <option>Romance</option>
+                <option>Anime</option>
+            </select>
+        </div>
+        <div id="v-model-select" class="col-auto">
+            <span>Plataforma de Streaming: {{ selected }}</span>
+            <select v-model="selected">
+                <option disabled value="">Selecione uma plataforma</option>
+                <option>Amazon Prime</option>
+                <option>Disney Plus</option>
+                <option>Netflix</option>
+                <option>HBO+</option>
+            </select>
         </div>
     </div>
 </template>
@@ -52,5 +73,13 @@ export default {
 </script>
 
 <style scoped>
+    label{
+        margin: 0px;
+    }
 
+    .row {
+        align-items: center;
+        align-content: center;
+        margin-bottom: 0px;
+    }
 </style>
