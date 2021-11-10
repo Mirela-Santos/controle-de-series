@@ -2177,6 +2177,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2209,6 +2214,27 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
+    editarSerie: function editarSerie() {
+      var _this2 = this;
+
+      axios.patch('api/v1/serie/{id}', {
+        nome: this.serie.titulo,
+        categoria: this.serie.categoria,
+        streaming: this.serie.streaming,
+        status: this.serie.status
+      }).then(function (response) {
+        if (response.status == '204') {
+          _this2.serie.titulo = '';
+          _this2.serie.categoria = '';
+          _this2.serie.streaming = '';
+          _this2.serie.status = '';
+
+          _this2.$emit('reloadlist');
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
     existeCampoVazio: function existeCampoVazio() {
       if (this.serie.titulo == "" || this.serie.categoria == "" || this.serie.streaming == "") {
         return true;
@@ -2232,9 +2258,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
 //
 //
 //
@@ -20684,6 +20707,21 @@ var render = function() {
         },
         [_vm._v("\n            Cadastrar\n        ")]
       )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-auto" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-warning",
+          on: {
+            click: function($event) {
+              return _vm.editarSerie()
+            }
+          }
+        },
+        [_vm._v("\n            Editar\n        ")]
+      )
     ])
   ])
 }
@@ -20757,20 +20795,7 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(serie.streaming))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(serie.status))]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-warning",
-                on: {
-                  click: function($event) {
-                    return _vm.editarSerie()
-                  }
-                }
-              },
-              [_vm._v("\n                    Editar\n                ")]
-            )
+            _c("td", [_vm._v(_vm._s(serie.status))])
           ])
         }),
         0

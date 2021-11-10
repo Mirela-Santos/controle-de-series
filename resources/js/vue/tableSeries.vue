@@ -18,9 +18,6 @@
                     <td>{{serie.categoria}}</td>
                     <td>{{serie.streaming}}</td>
                     <td>{{serie.status}}</td>
-                    <button class="btn btn-warning" @click="editarSerie()">
-                        Editar
-                    </button>
                 </tr>
             </tbody>
         </table> 

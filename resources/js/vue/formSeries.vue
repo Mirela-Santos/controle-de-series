@@ -41,6 +41,11 @@
                 Cadastrar
             </button>
         </div>
+        <div class="col-auto">
+            <button class="btn btn-warning" @click="editarSerie()">
+                Editar
+            </button>
+        </div>
     </div>
 </template>
 
@@ -68,6 +73,26 @@ export default {
                 .then( response => {
                     if(response.status == '201'){
                         this.serie.titulo = '';
+                        this.$emit('reloadlist');
+                    }
+                }) 
+                .catch( error => {
+                    console.log(error);
+                })
+        },
+        editarSerie(){
+            axios.patch('api/v1/serie/{id}',{
+                nome: this.serie.titulo,
+                categoria: this.serie.categoria,
+                streaming: this.serie.streaming,
+                status: this.serie.status
+            })
+                .then( response => {
+                    if(response.status == '204'){
+                        this.serie.titulo = '';
+                        this.serie.categoria = '';
+                        this.serie.streaming = '';
+                        this.serie.status = '';
                         this.$emit('reloadlist');
                     }
                 }) 

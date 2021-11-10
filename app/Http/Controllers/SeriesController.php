@@ -36,6 +36,12 @@ class SeriesController extends Controller
         if(isset($request['nome'])){
             $serie->nome = $request['nome'];
         }
+        if (isset($request['categoria'])){
+            $serie->status = $request['categoria'];
+        }
+        if (isset($request['streaming'])){
+            $serie->status = $request['streaming'];
+        }
         if (isset($request['status'])){
             $serie->status = $request['status'];
         }
