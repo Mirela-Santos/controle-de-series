@@ -20565,7 +20565,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-auto", attrs: { id: "v-model-select" } }, [
-      _c("span", [_vm._v("Categoria: " + _vm._s(_vm.selected))]),
+      _c("span", [_vm._v("Categoria: ")]),
       _vm._v(" "),
       _c(
         "select",

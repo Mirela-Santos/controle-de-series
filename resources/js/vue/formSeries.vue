@@ -18,7 +18,7 @@
             </button>
         </div>
         <div id="v-model-select" class="col-auto">
-            <span>Categoria: {{ selected }}</span>
+            <span>Categoria: </span>
             <select v-model="selected">
                 <option disabled value="">Selecione uma categoria</option>
                 <option>Ação</option>
@@ -29,7 +29,7 @@
             </select>
         </div>
         <div id="v-model-select" class="col-auto">
-            <span>Plataforma de Streaming: {{ selected }}</span>
+            <span>Plataforma de Streaming:</span>
             <select v-model="selected">
                 <option disabled value="">Selecione uma plataforma</option>
                 <option>Amazon Prime</option>
