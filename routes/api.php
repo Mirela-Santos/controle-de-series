@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SeriesController;
+use App\Http\Controllers\TemporadasController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,3 +19,11 @@ Route :: prefix('/v1/serie')->group(function (){
     Route :: put('{id}/status',[SeriesController::class, 'status']);
     Route :: delete('/{id}',[SeriesController::class, 'destroy']);
 }); 
+
+Route :: get('/v1/temporadas', [TemporadasController :: class, 'index']);
+Route::prefix('/v1/temporada')->group(function (){
+    Route :: post('/',[TemporadasController::class, 'store']);
+    Route :: get('/{id}',[TemporadasController::class, 'show']);
+    Route :: patch('/{id}',[TemporadasController::class, 'update']);
+    Route :: delete('/{id}',[TemporadasController::class, 'destroy']);
+});

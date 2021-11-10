@@ -2257,6 +2257,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['series']
 });
@@ -20753,7 +20757,20 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(serie.streaming))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(serie.status))])
+            _c("td", [_vm._v(_vm._s(serie.status))]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-warning",
+                on: {
+                  click: function($event) {
+                    return _vm.editarSerie()
+                  }
+                }
+              },
+              [_vm._v("\n                    Editar\n                ")]
+            )
           ])
         }),
         0
@@ -20776,7 +20793,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Streaming")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Editar")])
       ])
     ])
   }
