@@ -1,12 +1,12 @@
 <template>
     <div class="row">
         <div class="col-auto">
-            <span for="titulo" class="form-label">Título:</span>
+            <span for="nome" class="form-label">Título:</span>
         </div>
         <div class="col-auto">
             <input 
-                v-model="serie.titulo"
-                id="titulo" 
+                v-model="serie.nome"
+                id="nome" 
                 placeholder="Digite o título da serie" 
                 class="form-control"
                 required
@@ -37,13 +37,8 @@
             </select>
         </div>
         <div class="col-auto">
-            <button class="btn btn-primary" @click="cadastrarSerie()">
-                Cadastrar
-            </button>
-        </div>
-        <div class="col-auto">
-            <button class="btn btn-warning" @click="editarSerie()">
-                Editar
+            <button class="btn btn-primary" @click="this.serie.id ? editarSerie() : cadastrarSerie()">
+                {{serie.id ? 'Editar': 'Cadastrar'}}
             </button>
         </div>
     </div>
@@ -51,28 +46,22 @@
 
 <script>
 export default {
-    data: function () {
-        return{
-            serie: {
-                titulo: "",
-                categoria: "",
-                streaming: "",
-            }
-        }
-    },
+    props:['serie'],
     methods: {
         cadastrarSerie() {
-            if(this.existeCampoVazio()==true){
+            if(this.existeCampoVazio()==true || this.serie.id != null){
             return;
         }
             axios.post('api/v1/serie',{
-                nome: this.serie.titulo,
+                nome: this.serie.nome,
                 categoria: this.serie.categoria,
                 streaming: this.serie.streaming
             })
                 .then( response => {
                     if(response.status == '201'){
-                        this.serie.titulo = '';
+                        this.serie.nome = '';
+                        this.serie.categoria = '';
+                        this.serie.streaming = '';
                         this.$emit('reloadlist');
                     }
                 }) 
@@ -80,19 +69,23 @@ export default {
                     console.log(error);
                 })
         },
-        editarSerie(){
-            axios.patch('api/v1/serie/{id}',{
-                nome: this.serie.titulo,
+
+        editarSerie() {
+            if(this.existeCampoVazio()==true){
+                return;
+            }
+            axios.patch('api/v1/serie/'+this.serie.id,{
+                nome: this.serie.nome,
                 categoria: this.serie.categoria,
                 streaming: this.serie.streaming,
-                status: this.serie.status
+                status:this.serie.status,
             })
                 .then( response => {
                     if(response.status == '204'){
-                        this.serie.titulo = '';
+                        this.serie.id = null;
+                        this.serie.nome = '';
                         this.serie.categoria = '';
                         this.serie.streaming = '';
-                        this.serie.status = '';
                         this.$emit('reloadlist');
                     }
                 }) 
@@ -100,12 +93,13 @@ export default {
                     console.log(error);
                 })
         },
+        
         existeCampoVazio(){
-             if (this.serie.titulo == ""||this.serie.categoria == ""||this.serie.streaming==""){
+            if (this.serie.nome == ""||this.serie.categoria == ""||this.serie.streaming==""){
                 return true;
-             }
+            }
              return false;
-        }
+        },
     }
 }
 </script>

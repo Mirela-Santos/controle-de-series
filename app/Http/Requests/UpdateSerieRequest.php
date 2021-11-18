@@ -16,7 +16,9 @@ class UpdateSerieRequest extends FormRequest
     {
         return [
             'nome' => 'min:5|string',
-            'status' => 'in:assistido,não-assistido'
+            'categoria' => 'required|string',
+            'streaming' => 'required|string',
+            'status' => 'in:assistido,nao-assistido'
         ];
     }
 }

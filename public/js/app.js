@@ -2089,6 +2089,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2098,7 +2101,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      series: []
+      series: [],
+      serie: []
     };
   },
   methods: {
@@ -2107,7 +2111,15 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('api/v1/series').then(function (response) {
         _this.series = response.data;
-        console.log(_this.series);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    editar: function editar(id) {
+      var _this2 = this;
+
+      axios.get('api/v1/serie/' + id).then(function (response) {
+        _this2.serie = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2177,36 +2189,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      serie: {
-        titulo: "",
-        categoria: "",
-        streaming: ""
-      }
-    };
-  },
+  props: ['serie'],
   methods: {
     cadastrarSerie: function cadastrarSerie() {
       var _this = this;
 
-      if (this.existeCampoVazio() == true) {
+      if (this.existeCampoVazio() == true || this.serie.id != null) {
         return;
       }
 
       axios.post('api/v1/serie', {
-        nome: this.serie.titulo,
+        nome: this.serie.nome,
         categoria: this.serie.categoria,
         streaming: this.serie.streaming
       }).then(function (response) {
         if (response.status == '201') {
-          _this.serie.titulo = '';
+          _this.serie.nome = '';
+          _this.serie.categoria = '';
+          _this.serie.streaming = '';
 
           _this.$emit('reloadlist');
         }
@@ -2217,17 +2218,21 @@ __webpack_require__.r(__webpack_exports__);
     editarSerie: function editarSerie() {
       var _this2 = this;
 
-      axios.patch('api/v1/serie/{id}', {
-        nome: this.serie.titulo,
+      if (this.existeCampoVazio() == true) {
+        return;
+      }
+
+      axios.patch('api/v1/serie/' + this.serie.id, {
+        nome: this.serie.nome,
         categoria: this.serie.categoria,
         streaming: this.serie.streaming,
         status: this.serie.status
       }).then(function (response) {
         if (response.status == '204') {
-          _this2.serie.titulo = '';
+          _this2.serie.id = null;
+          _this2.serie.nome = '';
           _this2.serie.categoria = '';
           _this2.serie.streaming = '';
-          _this2.serie.status = '';
 
           _this2.$emit('reloadlist');
         }
@@ -2236,7 +2241,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     existeCampoVazio: function existeCampoVazio() {
-      if (this.serie.titulo == "" || this.serie.categoria == "" || this.serie.streaming == "") {
+      if (this.serie.nome == "" || this.serie.categoria == "" || this.serie.streaming == "") {
         return true;
       }
 
@@ -2284,8 +2289,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['series']
+  props: ['series'],
+  methods: {
+    editar: function editar(id) {
+      this.$emit('editarserie', id);
+    }
+  }
 });
 
 /***/ }),
@@ -20500,6 +20515,7 @@ var render = function() {
             _c("h2", [_vm._v("Séries")]),
             _vm._v(" "),
             _c("form-series", {
+              attrs: { serie: _vm.serie },
               on: {
                 reloadlist: function($event) {
                   return _vm.getSeries()
@@ -20517,8 +20533,8 @@ var render = function() {
             _c("table-series", {
               attrs: { series: _vm.series },
               on: {
-                reloadlist: function($event) {
-                  return _vm.getSeries()
+                editarserie: function($event) {
+                  return _vm.editar($event)
                 }
               }
             })
@@ -20572,23 +20588,23 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.serie.titulo,
-            expression: "serie.titulo"
+            value: _vm.serie.nome,
+            expression: "serie.nome"
           }
         ],
         staticClass: "form-control",
         attrs: {
-          id: "titulo",
+          id: "nome",
           placeholder: "Digite o título da serie",
           required: ""
         },
-        domProps: { value: _vm.serie.titulo },
+        domProps: { value: _vm.serie.nome },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.$set(_vm.serie, "titulo", $event.target.value)
+            _vm.$set(_vm.serie, "nome", $event.target.value)
           }
         }
       })
@@ -20701,26 +20717,17 @@ var render = function() {
           staticClass: "btn btn-primary",
           on: {
             click: function($event) {
-              return _vm.cadastrarSerie()
+              this.serie.id ? _vm.editarSerie() : _vm.cadastrarSerie()
             }
           }
         },
-        [_vm._v("\n            Cadastrar\n        ")]
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-auto" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-warning",
-          on: {
-            click: function($event) {
-              return _vm.editarSerie()
-            }
-          }
-        },
-        [_vm._v("\n            Editar\n        ")]
+        [
+          _vm._v(
+            "\n            " +
+              _vm._s(_vm.serie.id ? "Editar" : "Cadastrar") +
+              "\n        "
+          )
+        ]
       )
     ])
   ])
@@ -20731,7 +20738,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-auto" }, [
-      _c("span", { staticClass: "form-label", attrs: { for: "titulo" } }, [
+      _c("span", { staticClass: "form-label", attrs: { for: "nome" } }, [
         _vm._v("Título:")
       ])
     ])
@@ -20795,7 +20802,22 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(serie.streaming))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(serie.status))])
+            _c("td", [_vm._v(_vm._s(serie.status))]),
+            _vm._v(" "),
+            _c("td", [
+              _c("i", {
+                staticClass: "bi bi-pencil-square",
+                on: {
+                  click: function($event) {
+                    return _vm.editar(serie.id)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("i", { staticClass: "bi bi-trash" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "bi bi-check" })
+            ])
           ])
         }),
         0
@@ -20820,7 +20842,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Editar")])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Ações")])
       ])
     ])
   }

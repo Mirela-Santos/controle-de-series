@@ -7,12 +7,15 @@
             <div class="card">
                 <div class="card-header">
                     <h2>Séries</h2>
-                    <form-series v-on:reloadlist="getSeries()"/>
+                    <form-series 
+                        v-on:reloadlist="getSeries()"
+                        :serie="serie"
+                    />
                 </div>
                 <div class="card-body">
                     <table-series 
                     :series="series"
-                    v-on:reloadlist="getSeries()"
+                    v-on:editarserie="editar($event)"
                     />        
                 </div>
             </div>
@@ -32,16 +35,25 @@ export default {
     data: function() {
         return {
             series: [],
+            serie: [],
         }
     },
     methods: {
         getSeries() {
             axios.get('api/v1/series')
                 .then( response => {
-                    this.series = response.data
-                    console.log(this.series);
+                    this.series = response.data;
                 }) 
                 .catch( error => {
+                    console.log(error);
+                })
+        },
+        editar(id){
+            axios.get('api/v1/serie/' + id)
+                .then(response => {
+                    this.serie = response.data;
+                })
+                .catch(error => {
                     console.log(error);
                 })
         },

@@ -8,7 +8,7 @@
                     <th scope="col">Categoria</th>
                     <th scope="col">Streaming</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Editar</th>
+                    <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -18,6 +18,11 @@
                     <td>{{serie.categoria}}</td>
                     <td>{{serie.streaming}}</td>
                     <td>{{serie.status}}</td>
+                    <td>
+                        <i class="bi bi-pencil-square" @click="editar(serie.id)"></i>
+                        <i class="bi bi-trash"></i>
+                        <i class="bi bi-check"></i>
+                    </td>
                 </tr>
             </tbody>
         </table> 
@@ -28,6 +33,11 @@
 
 export default {
     props: ['series'],
+    methods: {
+        editar(id) {
+            this.$emit('editarserie',id);
+        }
+    }
 }
 </script>
 
