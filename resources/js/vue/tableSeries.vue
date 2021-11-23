@@ -36,7 +36,7 @@ export default {
     methods: {
         editar(id) {
             this.$emit('editarserie',id);
-        }
+        },
     }
 }
 </script>

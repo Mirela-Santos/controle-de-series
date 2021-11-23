@@ -2195,7 +2195,7 @@ __webpack_require__.r(__webpack_exports__);
     cadastrarSerie: function cadastrarSerie() {
       var _this = this;
 
-      if (this.existeCampoVazio() == true || this.serie.id != null) {
+      if (this.existeCampoVazio() == true) {
         return;
       }
 
@@ -2205,6 +2205,7 @@ __webpack_require__.r(__webpack_exports__);
         streaming: this.serie.streaming
       }).then(function (response) {
         if (response.status == '201') {
+          _this.serie.id = null;
           _this.serie.nome = '';
           _this.serie.categoria = '';
           _this.serie.streaming = '';
@@ -20717,7 +20718,7 @@ var render = function() {
           staticClass: "btn btn-primary",
           on: {
             click: function($event) {
-              this.serie.id ? _vm.editarSerie() : _vm.cadastrarSerie()
+              _vm.serie.id ? _vm.editarSerie() : _vm.cadastrarSerie()
             }
           }
         },

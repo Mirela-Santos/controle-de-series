@@ -37,7 +37,7 @@
             </select>
         </div>
         <div class="col-auto">
-            <button class="btn btn-primary" @click="this.serie.id ? editarSerie() : cadastrarSerie()">
+            <button class="btn btn-primary" @click="serie.id ? editarSerie() : cadastrarSerie()">
                 {{serie.id ? 'Editar': 'Cadastrar'}}
             </button>
         </div>
@@ -49,7 +49,7 @@ export default {
     props:['serie'],
     methods: {
         cadastrarSerie() {
-            if(this.existeCampoVazio()==true || this.serie.id != null){
+            if(this.existeCampoVazio()==true){
             return;
         }
             axios.post('api/v1/serie',{
@@ -59,6 +59,7 @@ export default {
             })
                 .then( response => {
                     if(response.status == '201'){
+                        this.serie.id = null;
                         this.serie.nome = '';
                         this.serie.categoria = '';
                         this.serie.streaming = '';
