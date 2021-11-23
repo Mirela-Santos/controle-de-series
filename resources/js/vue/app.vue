@@ -16,6 +16,7 @@
                     <table-series 
                     :series="series"
                     v-on:editarserie="editar($event)"
+                    v-on:apagarserie="apagar($event)"
                     />        
                 </div>
             </div>
@@ -52,6 +53,15 @@ export default {
             axios.get('api/v1/serie/' + id)
                 .then(response => {
                     this.serie = response.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        },
+        apagar(id){
+            axios.delete('api/v1/serie/' + id)
+                .then(() => {
+                    this.getSeries();
                 })
                 .catch(error => {
                     console.log(error);

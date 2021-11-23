@@ -20,7 +20,7 @@
                     <td>{{serie.status}}</td>
                     <td>
                         <i class="bi bi-pencil-square" @click="editar(serie.id)"></i>
-                        <i class="bi bi-trash"></i>
+                        <i class="bi bi-trash" @click="apagar(serie.id)"></i>
                         <i class="bi bi-check"></i>
                     </td>
                 </tr>
@@ -36,6 +36,9 @@ export default {
     methods: {
         editar(id) {
             this.$emit('editarserie',id);
+        },
+        apagar(id) {
+            this.$emit('apagarserie',id);
         },
     }
 }

@@ -2092,6 +2092,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2120,6 +2121,15 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('api/v1/serie/' + id).then(function (response) {
         _this2.serie = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    apagar: function apagar(id) {
+      var _this3 = this;
+
+      axios["delete"]('api/v1/serie/' + id).then(function () {
+        _this3.getSeries();
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2300,6 +2310,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     editar: function editar(id) {
       this.$emit('editarserie', id);
+    },
+    apagar: function apagar(id) {
+      this.$emit('apagarserie', id);
     }
   }
 });
@@ -20536,6 +20549,9 @@ var render = function() {
               on: {
                 editarserie: function($event) {
                   return _vm.editar($event)
+                },
+                apagarserie: function($event) {
+                  return _vm.apagar($event)
                 }
               }
             })
@@ -20815,7 +20831,14 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("i", { staticClass: "bi bi-trash" }),
+              _c("i", {
+                staticClass: "bi bi-trash",
+                on: {
+                  click: function($event) {
+                    return _vm.apagar(serie.id)
+                  }
+                }
+              }),
               _vm._v(" "),
               _c("i", { staticClass: "bi bi-check" })
             ])
