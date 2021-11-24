@@ -2093,6 +2093,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2128,13 +2129,22 @@ __webpack_require__.r(__webpack_exports__);
     apagar: function apagar(id) {
       var _this3 = this;
 
-      if (confirm("Sure?")) {
+      if (confirm("Pretende mesmo apagar esta serie?")) {
         axios["delete"]('api/v1/serie/' + id).then(function () {
           _this3.getSeries();
         })["catch"](function (error) {
           console.log(error);
         });
       }
+    },
+    estado: function estado(id) {
+      var _this4 = this;
+
+      axios.put('api/v1/serie/' + id + '/status').then(function () {
+        _this4.getSeries();
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   },
   created: function created() {
@@ -2315,6 +2325,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     apagar: function apagar(id) {
       this.$emit('apagarserie', id);
+    },
+    estado: function estado(id) {
+      this.$emit('mudarstatus', id);
     }
   }
 });
@@ -21366,6 +21379,9 @@ var render = function() {
                 },
                 apagarserie: function($event) {
                   return _vm.apagar($event)
+                },
+                mudarstatus: function($event) {
+                  return _vm.estado($event)
                 }
               }
             })
@@ -21654,7 +21670,14 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("i", { staticClass: "bi bi-check" })
+              _c("i", {
+                staticClass: "bi bi-check",
+                on: {
+                  click: function($event) {
+                    return _vm.estado(serie.id)
+                  }
+                }
+              })
             ])
           ])
         }),

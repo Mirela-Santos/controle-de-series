@@ -17,6 +17,7 @@
                     :series="series"
                     v-on:editarserie="editar($event)"
                     v-on:apagarserie="apagar($event)"
+                    v-on:mudarstatus="estado($event)"
                     />        
                 </div>
             </div>
@@ -69,6 +70,15 @@ export default {
                     })
             }
         },
+        estado(id){
+            axios.put('api/v1/serie/' + id + '/status')
+                .then(() => {
+                    this.getSeries();
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        }
     },
     created() {
         this.getSeries();
