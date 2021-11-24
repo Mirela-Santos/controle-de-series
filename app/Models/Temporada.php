@@ -10,6 +10,8 @@ class Temporada extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['serie_id','nome'];
+
     public function serie(){
         return $this->belongsTo(Serie::class);
     }

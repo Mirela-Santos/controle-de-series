@@ -14,35 +14,33 @@ class TemporadasController extends Controller
         return response(Temporada::all(), Response::HTTP_OK);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request):Response
     {
-        /** @todo criação da regra para salvar uma temporada */
-        return response('',Response::HTTP_CREATED);
+        $novaTemporada = Temporada::create($request->all());
+        return response($novaTemporada,Response::HTTP_CREATED);
     }
 
     
     public function show($id):Response
     {
-        /** @todo busscar temporada e retornar os dados */
-        return response('', Response::HTTP_OK);
+        $temporada = Temporada::findOrFail($id);
+        return response($temporada, Response::HTTP_OK);
     }
 
     
     public function update(Request $request, int $id):Response
     {
-       /** @todo atualização da tmeporada */
+        $temporada = Temporada::find($id);
+        $temporada->serie_id = $request['serie_id'];
+        $temporada->nome = $request['nome'];
+        $temporada->save();
         return response('No Content',Response::HTTP_NO_CONTENT);
     }
 
     public function destroy(int $id): Response
     {
-        /** @todo exclusão de series */
+        Temporada::destroy($id);
         return response('',Response::HTTP_OK);
     }
 }
