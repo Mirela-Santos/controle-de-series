@@ -59,13 +59,15 @@ export default {
                 })
         },
         apagar(id){
-            axios.delete('api/v1/serie/' + id)
-                .then(() => {
-                    this.getSeries();
-                })
-                .catch(error => {
-                    console.log(error);
-                })
+            if(confirm("Pretende mesmo apagar esta serie?")){
+                axios.delete('api/v1/serie/' + id)
+                    .then(() => {
+                        this.getSeries();
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            }
         },
     },
     created() {
