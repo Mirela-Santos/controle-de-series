@@ -15,4 +15,16 @@ class Serie extends Model
     public function temporadas(){
         return $this->hasMany(Temporada::class);
     }
+
+    public function alternarStatus(): void{
+        if ($this->ehNaoAssistido()) {
+            $this->status = 'assistido';
+        } else {
+            $this->status = 'nao-assistido';
+        }
+    }
+
+    private function ehNaoAssistido(): bool{
+        return ($this->status == 'nao-assistido') ? true : false;
+    }
 }
