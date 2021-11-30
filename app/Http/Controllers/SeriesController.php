@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSerieRequest;
-use App\Http\Requests\UpdateSerieRequest;
+use App\Http\Requests\Serie\StoreSerieRequest;
+use App\Http\Requests\Serie\UpdateSerieRequest;
 use App\Models\Serie;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -12,7 +12,7 @@ class SeriesController extends Controller
 {
     public function index(): Response
     {
-        return response(Serie::all(),Response :: HTTP_OK);
+        return response(Serie::with('temporadas')->get(),Response :: HTTP_OK);
     }
 
     public function store(StoreSerieRequest $request): Response

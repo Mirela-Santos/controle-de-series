@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Temporada;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Serie extends Model
@@ -13,7 +14,7 @@ class Serie extends Model
 
     protected $fillable = ['nome','categoria','streaming','status'];
 
-    public function temporadas(){
+    public function temporadas(): HasMany{
         return $this->hasMany(Temporada::class);
     }
 

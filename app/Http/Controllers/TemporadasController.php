@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Http\Requests\Temporada\IndexTemporadaRequest;
+use App\Http\Requests\Temporada\StoreTemporadaRequest;
+use App\Http\Requests\Temporada\UpdateTemporadaRequest;
 use App\Models\Temporada;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class TemporadasController extends Controller
 {
-    public function index():Response
+    public function index(IndexTemporadaRequest $request):Response
     {
-        return response(Temporada::all(), Response::HTTP_OK);
+        $where = ['serie_id'=>$request['serie_id']];
+        $temporadas = Temporada::where($where)->get();
+        return response($temporadas, Response::HTTP_OK);
     }
 
     
-    public function store(Request $request):Response
+    public function store(StoreTemporadaRequest $request):Response
     {
         $novaTemporada = Temporada::create($request->all());
         return response($novaTemporada,Response::HTTP_CREATED);
@@ -29,12 +33,11 @@ class TemporadasController extends Controller
     }
 
     
-    public function update(Request $request, int $id):Response
+    public function update(UpdateTemporadaRequest $request, int $id):Response
     {
         $temporada = Temporada::find($id);
-        $temporada->serie_id = $request['serie_id'];
-        $temporada->nome = $request['nome'];
-        $temporada->save();
+        $temporada->fill($request->all());
+        $temporada->update();
         return response('No Content',Response::HTTP_NO_CONTENT);
     }
 
