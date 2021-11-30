@@ -18,7 +18,7 @@ class CreateTemporadasTable extends Migration
             $table->unsignedInteger('serie_id');
             $table->string('nome');
             $table->timestamps();
-
+            $table->softDeletes();
             $table->foreign('serie_id')->references('id')->on('series');
         });
     }

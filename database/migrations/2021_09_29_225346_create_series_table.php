@@ -20,6 +20,7 @@ class CreateSeriesTable extends Migration
             $table->string('streaming')->nullable();
             $table->enum('status',['assistido','nao-assistido'])->default('nao-assistido');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
