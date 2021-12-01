@@ -8,6 +8,7 @@
                     <th scope="col">Categoria</th>
                     <th scope="col">Streaming</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Temporadas</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
@@ -18,6 +19,9 @@
                     <td>{{serie.categoria}}</td>
                     <td>{{serie.streaming}}</td>
                     <td>{{serie.status}}</td>
+                    <td>
+                        <i class="bi bi-display"></i>
+                    </td>
                     <td>
                         <i class="bi bi-pencil-square" @click="editar(serie.id)"></i>
                         <i class="bi bi-trash" @click="apagar(serie.id)"></i>

@@ -14,7 +14,7 @@ class TemporadasController extends Controller
     public function index(IndexTemporadaRequest $request):Response
     {
         $where = ['serie_id'=>$request['serie_id']];
-        $temporadas = Temporada::where($where)->get();
+        $temporadas = Temporada::with('episodios')->where($where)->get();
         return response($temporadas, Response::HTTP_OK);
     }
 
